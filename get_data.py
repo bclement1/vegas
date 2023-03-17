@@ -42,23 +42,36 @@ def load_data(data_directory: str = "data/images/"):
 
 
 def fetch_particular_series(
-    image_id: str, view_id: int, data_directory: str = "data/images/"
+    image_id: str,
+    view_id: int,
+    data_directory: str = "data/images/",
+    grayscale: bool = True,
 ):
     """
     Return all data that have the specified ID and view angle.
     """
     if len(image_id) != 6:
         raise IDFormatError
-    if view_id > 0:
+    if view_id >= 0:
         im_filename = str(image_id) + "_" + str(view_id) + ".jpg"
-        return cv2.imread(data_directory + im_filename, cv2.IMREAD_COLOR)
+        if grayscale:
+            return cv2.imread(data_directory + im_filename, cv2.IMREAD_GRAYSCALE)
+        else:
+            return cv2.imread(data_directory + im_filename, cv2.IMREAD_COLOR)
     else:
         placeholder = cv2.imread(data_directory + "009900_0.jpg")
         # return all the views that match the id
         X = np.zeros(shape=(6, placeholder.shape[0], placeholder.shape[1], 3))
         for view in range(6):
             im_filename = str(image_id) + "_" + str(view) + ".jpg"
-            X[view, :, :] = cv2.imread(data_directory + im_filename, cv2.IMREAD_COLOR)
+            if grayscale:
+                X[view, :, :] = cv2.imread(
+                    data_directory + im_filename, cv2.IMREAD_GRAYSCALE
+                )
+            else:
+                X[view, :, :] = cv2.imread(
+                    data_directory + im_filename, cv2.IMREAD_COLOR
+                )
     return X
 
 
