@@ -89,7 +89,7 @@ def load_particular_label(image_id: str, path: str = "data/labels.mat"):
     """
     mat = scipy.io.loadmat(path)
     image_id = int(image_id)
-    (x, y, z) = mat["GPS_Compass"][image_id]
+    (x, y, z) = mat["GPS_Compass"][image_id - 1]
     return (x, y, z)
 
 
