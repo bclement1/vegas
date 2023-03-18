@@ -80,7 +80,17 @@ def load_label(path: str = "data/labels.mat"):
     Load labels: (lat, long) in cartesian coordinates.
     """
     mat = scipy.io.loadmat(path)
-    print(len(mat["GPS_Compass"]))
+    print(mat["GPS_Compass"])
+
+
+def load_particular_label(image_id: str, path: str = "data/labels.mat"):
+    """
+    Load labels: (lat, long) in cartesian coordinates.
+    """
+    mat = scipy.io.loadmat(path)
+    image_id = int(image_id)
+    (x, y, z) = mat["GPS_Compass"][image_id - 1]
+    return (x, y, z)
 
 
 def plot_series(X):
@@ -105,6 +115,6 @@ def plot_series(X):
 
 if __name__ == "__main__":
     # load_data()
-    # load_label()
-    X = fetch_particular_series("009988", -1)
-    plot_series(X)
+    load_label()
+    # X = fetch_particular_series("009988", -1)
+    # plot_series(X)
