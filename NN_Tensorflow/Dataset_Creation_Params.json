@@ -1,27 +1,16 @@
 {
     "XPARAMS": {
         "TRAIN": {
-            "PATH": "D:/train_cleaned/",
-            "MODE": "HDF5",
+            "PATH": "D:/CV_Data/DATA/",
+            "MODE": "img4file",
             "METHOD": "item",
-            "OUTPUT": "D:/dataset_inter_scaled/"
+            "TYPE" : "color",
+            "OUTPUT": "D:/CV_Data/DATA/ASSEMBLY/"
         }
     },
     "XPREPROCESS": {
-        "interpolation": {
-            "SIZE": 1024,
-            "TYPE": "quadratic"
-        },
-        "rescaling_min_max": {}
+        "image_assembly": {}
     },
-    "YPARAMS": {
-        "TRAIN": {
-            "PATH": "C:/Users/trisr/Desktop/deepl/DATA/train_labels.csv",
-            "MODE": "csv",
-            "COL": "target",
-            "INDEX": "id",
-            "METHOD": "full"
-        }
-    },
+    "YPARAMS": null,
     "YPREPROCESS": null
 }

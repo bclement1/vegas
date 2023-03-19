@@ -27,6 +27,7 @@ import numpy as np
 import pandas as pd
 import h5py
 import pandas as pd
+import cv2
 
 # ******************************************************************************************************************** #
 # Function definition
@@ -55,6 +56,18 @@ def loading_csv(params):
     data = np.array(file[params["COL"]])
     return data
 
+def loading_img(file,params):
+    if params["TYPE"] =="grayscale":
+        data = cv2.imread(file,cv2.IMREAD_GRAYSCALE)
+    elif params["TYPE"] =="transparency ":
+        data = cv2.imread(file,cv2.IMREAD_UNCHANGED)
+    elif params["TYPE"] =="color":
+        data = cv2.imread(file,cv2.IMREAD_COLOR)
+    return data
+
+def loading_img4file(file,params):
+    data_path = file[:-6]
+    return data_path
 
 # ******************************************************************************************************************** #
 # Configuration

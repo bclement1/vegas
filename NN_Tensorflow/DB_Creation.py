@@ -3,7 +3,6 @@
 
 import os
 from NN_tensorflow import TF_input_pipeline
-
 import git
 
 
@@ -16,7 +15,7 @@ def get_git_root(path=os.getcwd()):
 git_root = get_git_root()
 
 dataset = TF_input_pipeline.TF_Dataset()
-dataset.from_json("DCGW_dataset_params.json")
+dataset.from_json("Dataset_Creation_Params.json")
 dataset.build()
 # dataset.save_database(path="D:/dataset_padded/", key=["xtrain"])
 print("Finish")
