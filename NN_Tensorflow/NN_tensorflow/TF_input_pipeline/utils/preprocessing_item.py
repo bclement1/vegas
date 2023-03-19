@@ -13,7 +13,7 @@
 
 
 """
-import os.path
+
 
 # Last commit ID   :
 # Last commit date :
@@ -27,7 +27,8 @@ import os.path
 import numpy as np
 import tensorflow as tf
 from scipy import interpolate
-
+import os
+import cv2
 # ******************************************************************************************************************** #
 # Function definition
 def interpolation(list_data, open_data, root="", params=None):
@@ -206,7 +207,32 @@ def list2tfrecord(list_data_path, open_data, root="", yvalue=None, params=None):
 
     return preprocessing
 
+def image_assembly(list_data_path, open_data, root="", yvalue=None, params=None):
+    already_seen = []
+    def preprocessing(x, file):
+        if not x in already_seen:
+            data_path = x
+            file_name = data_path.split("/")[-1]+".npz"
+            image1 = cv2.imread(data_path+"_1.jpg")
+            image2 = cv2.imread(data_path+"_2.jpg")
+            image3 = cv2.imread(data_path+"_3.jpg")
+            image4 = cv2.imread(data_path+"_4.jpg")
+            already_seen.append(data_path)
+            center = image1.shape
+            w = 1280
+            h = 1024
+            x = center[1] / 2 - 1280 / 2
+            y = center[0] / 2 - 1024 / 2
+            image1 = image1[int(y):int(y + h), int(x):int(x + w)]
+            image2 = image2[int(y):int(y + h), int(x):int(x + w)]
+            image3 = image3[int(y):int(y + h), int(x):int(x + w)]
+            image4 = image4[int(y):int(y + h), int(x):int(x + w)]
+            image = np.concatenate([image1,image2,image3,image4],axis=1)
+            return image,file_name
+        else:
+            return None,None
 
+    return preprocessing
 # ******************************************************************************************************************** #
 # Configuration
 preprocess_function = {name[(len("")) :]: value for name, value in globals().items() if name.startswith("")}

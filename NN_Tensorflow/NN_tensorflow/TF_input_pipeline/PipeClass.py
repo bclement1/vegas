@@ -268,7 +268,7 @@ class TF_Dataset:
                 for key in self.xpreprocess.keys():
                     preprocessing.append(
                         preprocess_function[key](
-                            list_data=self.XDATA_train,
+                            list_data_path=self.XDATA_train,
                             open_data=loading[self.xparams["TRAIN"]["MODE"]],
                             root=self.xparams["TRAIN"]["PATH"],
                             params=self.xpreprocess[key],
@@ -276,10 +276,11 @@ class TF_Dataset:
                     )
                 os.makedirs(path, exist_ok=True)
                 for file in tqdm.tqdm(self.XDATA_train):
-                    xtrain = loading[self.xparams["TRAIN"]["MODE"]](self.xparams["TRAIN"]["PATH"] + file)
+                    xtrain = loading[self.xparams["TRAIN"]["MODE"]](self.xparams["TRAIN"]["PATH"] + file,self.xparams["TRAIN"])
                     for func in preprocessing:
                         xtrain, file = func(xtrain, file)
-                    np.savez(path + file, xtrain=xtrain, xindex=file.split(".")[0])
+                    if file!=None:
+                        np.savez(path+file, xtrain=xtrain, xindex=file.split(".")[0])
 
     def yprocess(self, method, path):
         if method == "full":

@@ -33,7 +33,7 @@ import tqdm
 size_test = 100
 proportion_test = None
 
-data_path = "D:/dataset_inter_scaled/"
+data_path = "D:/CV_Data/DATA/ASSEMBLY/"
 label_path = "C:/Users/trisr/Desktop/deepl/DATA/train_labels.csv"
 
 # ******************************************************************************************************************** #
