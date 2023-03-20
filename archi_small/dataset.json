@@ -1,0 +1,20 @@
+{
+    "XPARAMS": {
+        "TRAIN": {
+            "PATH": "D:/CV_Data/DATA/ASSEMBLY/small/train/tfrecord_2D.tfrecord",
+            "MODE": "TFRecord",
+            "METHOD": "full",
+            "SHUFFLE_BUFFER_SIZE": "5",
+            "BATCH_SIZE": "1",
+            "parse_function": "None"
+        },
+        "TEST": {
+            "PATH": "D:/CV_Data/DATA/ASSEMBLY/small/test/tfrecord_2D.tfrecord",
+            "MODE": "TFRecord",
+            "METHOD": "full",
+            "SHUFFLE_BUFFER_SIZE": "5",
+            "BATCH_SIZE": "1",
+            "parse_function": "None"
+        }
+    }
+}

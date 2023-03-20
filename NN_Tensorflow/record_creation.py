@@ -7,9 +7,9 @@ import scipy.io
 
 paths = [
     "D:/CV_Data/DATA/ASSEMBLY/test/",
-    "D:/CV_Data/DATA/ASSEMBLY/train/",
-    "D:/CV_Data/DATA/ASSEMBLY/small/test/",
-    "D:/CV_Data/DATA/ASSEMBLY/small/train/",
+#     "D:/CV_Data/DATA/ASSEMBLY/train/",
+#     "D:/CV_Data/DATA/ASSEMBLY/small/test/",
+#     "D:/CV_Data/DATA/ASSEMBLY/small/train/",
 ]
 # df = pd.read_csv("D:/CV_Data/DATA/ASSEMBLY/train_labels.csv")
 mat = scipy.io.loadmat("D:\CV_Data\GPS_Long_Lat_Compass.mat")
@@ -50,7 +50,7 @@ def parse_function(example_proto):
     array = tf.io.decode_raw(parsed_features["array"], np.int8)
     label = tf.io.decode_raw(parsed_features["label"], np.float64)
     array = tf.reshape(array, [1024, 5120, 3])
-    label = tf.reshape(label, [3])
+    label = tf.reshape(label, [2])
     # label = tf.reshape(parsed_features["label"], [1])
     # label = tf.cast(label, tf.float64)
     return array, label
@@ -61,7 +61,7 @@ if __name__ == "__main__":
         tf_creation(path,mat)
 
     tfrecord_dataset = tf.data.TFRecordDataset(
-        "D:/CV_Data/DATA/ASSEMBLY/small/test/tfrecord.tfrecord"
+        "D:/CV_Data/DATA/ASSEMBLY/small/test/tfrecord_2D.tfrecord"
 )
     dataset = tfrecord_dataset.map(parse_function)
     print("loaded")

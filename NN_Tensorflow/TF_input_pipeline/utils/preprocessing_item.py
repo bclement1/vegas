@@ -28,7 +28,7 @@ import numpy as np
 import tensorflow as tf
 from scipy import interpolate
 import os
-import cv2
+from PIL import Image
 # ******************************************************************************************************************** #
 # Function definition
 def interpolation(list_data, open_data, root="", params=None):
@@ -213,10 +213,10 @@ def image_assembly(list_data_path, open_data, root="", yvalue=None, params=None)
         if not x in already_seen:
             data_path = x
             file_name = data_path.split("/")[-1]+".npz"
-            image1 = cv2.imread(data_path+"_1.jpg")
-            image2 = cv2.imread(data_path+"_2.jpg")
-            image3 = cv2.imread(data_path+"_3.jpg")
-            image4 = cv2.imread(data_path+"_4.jpg")
+            image1 = Image.open(data_path+"_1.jpg")
+            image2 = Image.open(data_path+"_2.jpg")
+            image3 = Image.open(data_path+"_3.jpg")
+            image4 = Image.open(data_path+"_4.jpg")
             already_seen.append(data_path)
             center = image1.shape
             w = 1280

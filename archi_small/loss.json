@@ -1,0 +1,6 @@
+{
+    "name": "MeanAbsoluteError",
+    "type": "MeanAbsoluteError",
+    "params": {
+    }
+}
