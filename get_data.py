@@ -55,23 +55,32 @@ def fetch_particular_series(
     if view_id >= 0:
         im_filename = str(image_id) + "_" + str(view_id) + ".jpg"
         if grayscale:
-            return cv2.imread(data_directory + im_filename, cv2.IMREAD_GRAYSCALE)
+            im = cv2.imread(data_directory + im_filename, cv2.IMREAD_GRAYSCALE)
+            im[:150, :100] = 0.0
+            return im
         else:
-            return cv2.imread(data_directory + im_filename, cv2.IMREAD_COLOR)
+            im = cv2.imread(data_directory + im_filename, cv2.IMREAD_COLOR)
+            im[:150, :100] = [0.0, 0.0, 0.0]
+            return im
     else:
         placeholder = cv2.imread(data_directory + "009900_0.jpg")
         # return all the views that match the id
-        X = np.zeros(shape=(6, placeholder.shape[0], placeholder.shape[1], 3))
+        if grayscale:
+            X = np.zeros(shape=(6, placeholder.shape[0], placeholder.shape[1]))
+        else:
+            X = np.zeros(shape=(6, placeholder.shape[0], placeholder.shape[1], 3))
         for view in range(6):
             im_filename = str(image_id) + "_" + str(view) + ".jpg"
             if grayscale:
                 X[view, :, :] = cv2.imread(
                     data_directory + im_filename, cv2.IMREAD_GRAYSCALE
                 )
+                X[view, :150, :100] = 0.0
             else:
                 X[view, :, :] = cv2.imread(
                     data_directory + im_filename, cv2.IMREAD_COLOR
                 )
+                X[view, :150, :100, :] = [0.0, 0.0, 0.0]
     return X
 
 
