@@ -1,5 +1,12 @@
 {
     "layer 0": {
+        "name": 2,
+        "layer_type": "Rotating_padding",
+        "layer_config": {
+            "kernel_size": 15
+        }
+    },
+    "layer 1": {
         "name": 1,
         "layer_type": "Conv2D",
         "layer_config": {
@@ -7,9 +14,9 @@
             "trainable": true,
             "dtype": null,
             "filters": 16,
-            "kernel_size": 4,
-            "strides": [2,1],
-            "padding": "same",
+            "kernel_size": 16,
+            "strides": [1,1],
+            "padding": "valid",
             "data_format": null,
             "dilation_rate": null,
             "groups": null,
@@ -24,18 +31,11 @@
             "bias_constraint": null
         }
     },
-    "layer 1": {
-        "name": 2,
-        "layer_type": "BatchNormalization",
-        "layer_config": {
-
-        }
-    },
     "layer 2": {
         "name": 2,
         "layer_type": "Dropout",
         "layer_config": {
-            "rate": 0.2
+            "rate" : 0.2
         }
     },
     "layer 3": {
@@ -56,6 +56,13 @@
     },
 
     "layer 4": {
+        "name": 2,
+        "layer_type": "Rotating_padding",
+        "layer_config": {
+            "kernel_size": 15
+        }
+    },
+    "layer 5": {
         "name": 1,
         "layer_type": "Conv2D",
         "layer_config": {
@@ -63,9 +70,9 @@
             "trainable": true,
             "dtype": null,
             "filters": 16,
-            "kernel_size": 4,
-            "strides": [2,1],
-            "padding": "same",
+            "kernel_size": 32,
+            "strides": [1,1],
+            "padding": "valid",
             "data_format": null,
             "dilation_rate": null,
             "groups": null,
@@ -78,40 +85,16 @@
             "activity_regularizer": null,
             "kernel_constraint": null,
             "bias_constraint": null
-        }
-    },
-    "layer 5": {
-        "name": 2,
-        "layer_type": "BatchNormalization",
-        "layer_config": {
-
         }
     },
     "layer 6": {
         "name": 2,
-        "layer_type": "Dropout",
+        "layer_type": "Rotating_padding",
         "layer_config": {
-            "rate": 0.2
+            "kernel_size": 15
         }
     },
     "layer 7": {
-        "name": 2,
-        "layer_type": "MaxPooling2D",
-        "layer_config": {
-            "name": null,
-            "trainable": null,
-            "dtype": null,
-            "pool_size": [
-                2,
-                2
-            ],
-            "padding": null,
-            "strides": null,
-            "data_format": "channels_last"
-        }
-    },
-
-    "layer 8": {
         "name": 1,
         "layer_type": "Conv2D",
         "layer_config": {
@@ -119,9 +102,9 @@
             "trainable": true,
             "dtype": null,
             "filters": 16,
-            "kernel_size": 4,
-            "strides": [2,1],
-            "padding": "same",
+            "kernel_size": 64,
+            "strides": [2,2],
+            "padding": "valid",
             "data_format": null,
             "dilation_rate": null,
             "groups": null,
@@ -136,18 +119,43 @@
             "bias_constraint": null
         }
     },
-    "layer 9": {
+    "layer 8": {
         "name": 2,
-        "layer_type": "BatchNormalization",
+        "layer_type": "Rotating_padding",
         "layer_config": {
-
+            "kernel_size": 15
+        }
+    },
+    "layer 9": {
+        "name": 1,
+        "layer_type": "Conv2D",
+        "layer_config": {
+            "name": null,
+            "trainable": true,
+            "dtype": null,
+            "filters": 16,
+            "kernel_size": 32,
+            "strides": [1,1],
+            "padding": "valid",
+            "data_format": null,
+            "dilation_rate": null,
+            "groups": null,
+            "activation": "relu",
+            "use_bias": null,
+            "kernel_initializer": "RandomUniform",
+            "bias_initializer": "zeros",
+            "kernel_regularizer": "l2",
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null
         }
     },
     "layer 10": {
         "name": 2,
         "layer_type": "Dropout",
         "layer_config": {
-            "rate": 0.2
+            "rate" : 0.2
         }
     },
     "layer 11": {
@@ -168,16 +176,23 @@
     },
 
     "layer 12": {
+        "name": 2,
+        "layer_type": "Rotating_padding",
+        "layer_config": {
+            "kernel_size": 15
+        }
+    },
+    "layer 13": {
         "name": 1,
         "layer_type": "Conv2D",
         "layer_config": {
             "name": null,
             "trainable": true,
             "dtype": null,
-            "filters": 16,
-            "kernel_size": 4,
-            "strides": [2,1],
-            "padding": "same",
+            "filters": 2,
+            "kernel_size": 16,
+            "strides": [2,2],
+            "padding": "valid",
             "data_format": null,
             "dilation_rate": null,
             "groups": null,
@@ -192,18 +207,11 @@
             "bias_constraint": null
         }
     },
-    "layer 13": {
-        "name": 2,
-        "layer_type": "BatchNormalization",
-        "layer_config": {
-
-        }
-    },
     "layer 14": {
         "name": 2,
         "layer_type": "Dropout",
         "layer_config": {
-            "rate": 0.2
+            "rate" : 0.2
         }
     },
     "layer 15": {
@@ -223,6 +231,7 @@
         }
     },
 
+
     "layer 16": {
         "name": 4,
         "layer_type": "Flatten",
@@ -234,6 +243,25 @@
         }
     },
     "layer 17": {
+        "name": 4,
+        "layer_type": "Dense",
+        "layer_config": {
+            "name": null,
+            "trainable": true,
+            "dtype": null,
+            "units": 8,
+            "activation": null,
+            "use_bias": true,
+            "kernel_initializer": "RandomUniform",
+            "bias_initializer": "zeros",
+            "kernel_regularizer": "l2",
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null
+            }
+        },
+    "layer 18": {
         "name": 4,
         "layer_type": "Dense",
         "layer_config": {

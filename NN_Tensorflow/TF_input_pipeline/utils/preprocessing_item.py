@@ -213,10 +213,10 @@ def image_assembly(list_data_path, open_data, root="", yvalue=None, params=None)
         if not x in already_seen:
             data_path = x
             file_name = data_path.split("/")[-1]+".npz"
-            image1 = Image.open(data_path+"_1.jpg")
-            image2 = Image.open(data_path+"_2.jpg")
-            image3 = Image.open(data_path+"_3.jpg")
-            image4 = Image.open(data_path+"_4.jpg")
+            image1 = np.array(Image.open(data_path+"_1.jpg"))
+            image2 = np.array(Image.open(data_path+"_2.jpg"))
+            image3 = np.array(Image.open(data_path+"_3.jpg"))
+            image4 = np.array(Image.open(data_path+"_4.jpg"))
             already_seen.append(data_path)
             center = image1.shape
             w = 1280
@@ -233,6 +233,35 @@ def image_assembly(list_data_path, open_data, root="", yvalue=None, params=None)
             return None,None
 
     return preprocessing
+
+def image_assembly_4channel(list_data_path, open_data, root="", yvalue=None, params=None):
+    already_seen = []
+    def preprocessing(x, file):
+        if not x in already_seen:
+            data_path = x
+            file_name = data_path.split("/")[-1]+".npz"
+            image1 = np.array(Image.open(data_path+"_1.jpg"))
+            image2 = np.array(Image.open(data_path+"_2.jpg"))
+            image3 = np.array(Image.open(data_path+"_3.jpg"))
+            image4 = np.array(Image.open(data_path+"_4.jpg"))
+            already_seen.append(data_path)
+            center = image1.shape
+            w = 1280
+            h = 1024
+            x = center[1] / 2 - 1280 / 2
+            y = center[0] / 2 - 1024 / 2
+            image1 = image1[int(y):int(y + h), int(x):int(x + w)]
+            image2 = image2[int(y):int(y + h), int(x):int(x + w)]
+            image3 = image3[int(y):int(y + h), int(x):int(x + w)]
+            image4 = image4[int(y):int(y + h), int(x):int(x + w)]
+            image = np.concatenate([image1, image2, image3, image4], axis=2)
+            image = np.reshape(image, (image.shape[0], image.shape[1], 4, 3))
+            return image,file_name
+        else:
+            return None,None
+
+    return preprocessing
+
 # ******************************************************************************************************************** #
 # Configuration
 preprocess_function = {name[(len("")) :]: value for name, value in globals().items() if name.startswith("")}

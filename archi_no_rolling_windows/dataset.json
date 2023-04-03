@@ -4,7 +4,7 @@
             "PATH": "D:/CV_Data/DATA/ASSEMBLY/small/train/tfrecord_2D.tfrecord",
             "MODE": "TFRecord",
             "METHOD": "full",
-            "SHUFFLE_BUFFER_SIZE": "5",
+            "SHUFFLE_BUFFER_SIZE": "10",
             "BATCH_SIZE": "1",
             "parse_function": "None"
         },
@@ -12,7 +12,7 @@
             "PATH": "D:/CV_Data/DATA/ASSEMBLY/small/test/tfrecord_2D.tfrecord",
             "MODE": "TFRecord",
             "METHOD": "full",
-            "SHUFFLE_BUFFER_SIZE": "5",
+            "SHUFFLE_BUFFER_SIZE": "10",
             "BATCH_SIZE": "1",
             "parse_function": "None"
         }

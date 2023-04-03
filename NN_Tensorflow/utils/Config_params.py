@@ -31,8 +31,7 @@ from tensorflow.keras import layers
 # Configuration
 dict_needed_params = {}
 dict_needed_params["AbstractRNNCell"] = []
-dict_needed_params["Rotating_padding"] = ["filters"]
-
+dict_needed_params["Rotating_padding"] = ["kernel_size"]
 dict_needed_params["Activation"] = ["activation"]
 dict_needed_params["ActivityRegularization"] = []
 dict_needed_params["Add"] = []
@@ -173,7 +172,7 @@ dict_needed_params["multiply"] = ["inputs"]
 
 dict_params_layers = {}
 dict_params_layers["AbstractRNNCell"] = layers.AbstractRNNCell().get_config().keys()
-dict_params_layers["Rotating_padding"] = []
+dict_params_layers["Rotating_padding"] = ["kernel_size"]
 dict_params_layers["Activation"] = layers.Activation(activation="relu").get_config().keys()
 dict_params_layers["ActivityRegularization"] = layers.ActivityRegularization().get_config().keys()
 dict_params_layers["Add"] = layers.Add().get_config().keys()
