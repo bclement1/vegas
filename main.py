@@ -59,7 +59,7 @@ def parse_function_3D(example_proto):
 # Main
 if __name__ == "__main__":
     model = NN_tensorflow.TF_Model(name="Test Model")
-    model.from_json("archi_small/")
+    model.from_json("archi_rolling_windows/")
     model.dataset.update(
         specfication="xparams", key="TRAIN", keyparams="parse_function", paramsvalue=parse_function_2D,
     )

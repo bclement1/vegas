@@ -32,23 +32,24 @@ import numpy as np
 
 
 class Rotating_padding(tf.keras.layers.Layer):
-    def __init__(self, filters):
-        self.filters = filters
+    def __init__(self, kernel_size):
+        self.kernel_size = kernel_size
+        super().__init__()
 
     def call(self, inputs):  # Defines the computation from inputs to outputs
         # Preprocess
         paddings = tf.constant([
-            [self.filters[1], self.filters[1]],
             [0, 0],
-            [0, 0]
+            [0, 0],
+            [self.kernel_size, 0],
+            [0, 0],
         ])
-
         # First Padding
         outputs = tf.pad(inputs, paddings, "CONSTANT")
 
         # Second padding
         adding_tensor = tf.reverse(
-            outputs[:, :, -self.filters[0]:],
+            outputs[:, -self.kernel_size:],
             [-1],
         )
         outputs = tf.concat([outputs, adding_tensor], axis=1)
@@ -59,9 +60,10 @@ class Rotating_padding(tf.keras.layers.Layer):
 # ******************************************************************************************************************** #
 # Building function definition
 
-def Rotating_Windows_build(inputs, config_layers):
+def Rotating_padding_build(inputs, config_layers):
     outputs = Rotating_padding(**config_layers)(inputs)
     return outputs
+
 def AbstractRNNCell_build(inputs, config_layers):
     """
 

@@ -24,6 +24,9 @@
 # Importations
 import json
 import tensorflow.keras.metrics as metrics
+import tensorflow as tf
+import geopy.distance
+import math
 
 # ******************************************************************************************************************** #
 # Configuration
@@ -69,6 +72,7 @@ dict_needed_params["TopKCategoricalAccuracy"] = []
 dict_needed_params["TrueNegatives"] = []
 dict_needed_params["TruePositives"] = []
 dict_needed_params["DCGW"] = []
+dict_needed_params["distance_from_LATLONG"] = []
 
 dict_params_metrics = {}
 dict_params_metrics["AUC"] = metrics.AUC().get_config().keys()
@@ -112,10 +116,54 @@ dict_params_metrics["TopKCategoricalAccuracy"] = metrics.TopKCategoricalAccuracy
 dict_params_metrics["TrueNegatives"] = metrics.TrueNegatives().get_config().keys()
 dict_params_metrics["TruePositives"] = metrics.TruePositives().get_config().keys()
 dict_params_metrics["DCGW"] = []
+dict_params_metrics["distance_from_LATLONG"] = []
+
+
+# ******************************************************************************************************************** #
+# Class definition
+class HaversineDistance(tf.keras.metrics.Metric):
+    def __init__(self, name='haversine_distance', **kwargs):
+        super().__init__(name=name, **kwargs)
+        self.total_distance = self.add_weight(name='total_distance', initializer='zeros')
+        self.num_samples = self.add_weight(name='num_samples', initializer='zeros')
+
+    def update_state(self, y_true, y_pred, sample_weight=None):
+        # Convert latitude-longitude coordinates to radians
+        lat1, lon1 = tf.multiply(y_true[..., 0], math.pi/180), tf.multiply(y_true[..., 1], math.pi/180)
+        lat2, lon2 = tf.multiply(y_pred[..., 0], math.pi/180), tf.multiply(y_pred[..., 1], math.pi/180)
+
+        # Calculate differences between coordinates
+        dlat = lat2 - lat1
+        dlon = lon2 - lon1
+
+        # Apply Haversine formula
+        a = tf.square(tf.sin(dlat / 2)) + tf.cos(lat1) * tf.cos(lat2) * tf.square(tf.sin(dlon / 2))
+        c = 2 * tf.atan2(tf.sqrt(a), tf.sqrt(1 - a))
+        distance = 6371 * c  # Radius of Earth in km
+
+        # Update state variables
+        if sample_weight is not None:
+            sample_weight = tf.cast(sample_weight, self.dtype)
+            distance = tf.multiply(distance, sample_weight)
+            self.num_samples.assign_add(tf.reduce_sum(sample_weight))
+        else:
+            self.num_samples.assign_add(tf.cast(tf.size(distance), self.dtype))
+
+        self.total_distance.assign_add(tf.reduce_sum(distance))
+
+    def result(self):
+        return tf.math.divide_no_nan(self.total_distance, self.num_samples)
+
+    def reset_states(self):
+        self.total_distance.assign(0)
+        self.num_samples.assign(0)
 
 # ******************************************************************************************************************** #
 # Function definition
 
+def distance_from_LATLONG_build(config_metrics):
+    metric = HaversineDistance(**config_metrics)
+    return metric
 
 def AUC_build(config_metrics):
     """

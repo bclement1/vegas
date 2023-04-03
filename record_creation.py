@@ -6,10 +6,10 @@ import tqdm
 import scipy.io
 
 paths = [
-    "D:/CV_Data/DATA/ASSEMBLY/test/",
-#     "D:/CV_Data/DATA/ASSEMBLY/train/",
-#     "D:/CV_Data/DATA/ASSEMBLY/small/test/",
-#     "D:/CV_Data/DATA/ASSEMBLY/small/train/",
+    "D:/CV_Data/DATA/4CHANNELS/test/",
+    "D:/CV_Data/DATA/4CHANNELS/train/",
+    "D:/CV_Data/DATA/4CHANNELS/small/test/",
+    "D:/CV_Data/DATA/4CHANNELS/small/train/",
 ]
 # df = pd.read_csv("D:/CV_Data/DATA/ASSEMBLY/train_labels.csv")
 mat = scipy.io.loadmat("D:\CV_Data\GPS_Long_Lat_Compass.mat")
@@ -17,7 +17,7 @@ mat = scipy.io.loadmat("D:\CV_Data\GPS_Long_Lat_Compass.mat")
 def tf_creation(data_path,mat):
     # Create a TFRecordWriter
     print(data_path)
-    writer = tf.io.TFRecordWriter(data_path + "tfrecord.tfrecord")
+    writer = tf.io.TFRecordWriter(data_path + "tfrecord_2D.tfrecord")
     i = 0
     # Iterate over the list of arrays and labels
     for file in tqdm.tqdm(os.listdir(data_path)):
@@ -26,7 +26,7 @@ def tf_creation(data_path,mat):
             # Convert the array to a bytes-like object
             array_bytes = array.tobytes()
             label = mat["GPS_Compass"][
-                int("".join(file.split(".")[:-1]))-1]
+                int("".join(file.split(".")[:-1]))-1][:2w]
             # Create features containing the array and label
             label_bytes = label.tobytes()
             feature = {
@@ -61,7 +61,7 @@ if __name__ == "__main__":
         tf_creation(path,mat)
 
     tfrecord_dataset = tf.data.TFRecordDataset(
-        "D:/CV_Data/DATA/ASSEMBLY/small/test/tfrecord_2D.tfrecord"
+        "D:/CV_Data/DATA/4CHANNELS/small/test/tfrecord_2D.tfrecord"
 )
     dataset = tfrecord_dataset.map(parse_function)
     print("loaded")

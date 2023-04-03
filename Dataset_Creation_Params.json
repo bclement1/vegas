@@ -1,15 +1,15 @@
 {
     "XPARAMS": {
         "TRAIN": {
-            "PATH": "D:/CV_Data/DATA/",
+            "PATH": "D:/CV_Data/DATA/RAW/",
             "MODE": "img4file",
             "METHOD": "item",
             "TYPE" : "color",
-            "OUTPUT": "D:/CV_Data/DATA/ASSEMBLY/"
+            "OUTPUT": "D:/CV_Data/DATA/4CHANNELS/"
         }
     },
     "XPREPROCESS": {
-        "image_assembly": {}
+        "image_assembly_4channel": {}
     },
     "YPARAMS": null,
     "YPREPROCESS": null

@@ -1,0 +1,6 @@
+{
+    "name": "MSE",
+    "type": "MeanSquaredError",
+    "params": {
+    }
+}
