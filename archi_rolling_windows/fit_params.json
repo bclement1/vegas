@@ -2,7 +2,7 @@
     "x": null,
     "y": null,
     "batch_size": 1,
-    "epochs": 100,
+    "epochs": 150,
     "verbose": 2,
     "callbacks": null,
     "validation_split": 0.0,
