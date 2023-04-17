@@ -10,7 +10,7 @@ Nous avons travaillé en équipe de 3 personnes : <br>
 <br>
 
 ## Données
-Pour ce projet, nous utiliserons les données <a href="http://www.cs.ucf.edu/~aroshan/index_files/Dataset_PitOrlManh/">suivant</a>.
+Pour ce projet, nous utiliserons les données <a href="http://www.cs.ucf.edu/~aroshan/index_files/Dataset_PitOrlManh/">suivantes</a>.
 Il contient environ 60.000 images de vues urbaines issues de l'outil Google Street View, prises dans des grandes villes américaines : Pittsburgh, Orlando et Manhattan.
 <br><br>
 
