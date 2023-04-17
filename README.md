@@ -1,17 +1,17 @@
-# Localisation à partir d'images issues de Google Street View
+# VEGAS: Visual position Estimation of Geographic Areas in the (United) States
 
 ## Membres
 Nous avons travaillé en équipe de 3 personnes : <br>
 <p style="margin-left:30px">
-    - Tristan Basler <br>
-    - Vivien Conti <br>
-    - Clément Boulay
+    - Tristan Basler (CentraleSupélec) <br>
+    - Vivien Conti (CentraleSupélec) <br>
+    - Clément Boulay (CentraleSupélec)
 </p>
 <br>
 
 ## Données
 Pour ce projet, nous utiliserons les données <a href="http://www.cs.ucf.edu/~aroshan/index_files/Dataset_PitOrlManh/">suivantes</a>.
-Il contient environ 60.000 images de vues urbaines issues de l'outil Google Street View, prises dans des grandes villes américaines : Pittsburgh, Orlando et Manhattan.
+Il contient plus de 60.000 images de vues urbaines issues de l'outil Google Street View, prises dans 3 grandes villes américaines : Pittsburgh, Orlando et Manhattan.
 <br><br>
 
 ## Description du projet
