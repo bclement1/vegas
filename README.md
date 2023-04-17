@@ -19,16 +19,6 @@ Il contient environ 60.000 images de vues urbaines issues de l'outil Google Stre
 On souhaite, en utilisant les méthodes présentées dans le cours de Reconnaissance visuelle, parvenir à estimer la position GPS d'un nouveau couple de 6 images prises à un même point géographique.
 <br><br>
 
-## Démarrage rapide
-
-Comment utiliser le projet et obtenir des graphiques/résultats rapidement ?
-<br><br>
-
-## Principaux résultats établis
-
-Présenter ici les principaux résultats obtenus.
-<br><br>
-
 ## Remerciements
 
-Merci à Céline Hudelot (CentraleSupélec) qui nous a conseillé durant le projet.
+Merci à Céline Hudelot (CentraleSupélec) qui nous a conseillés durant le projet.
